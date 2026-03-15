@@ -5,6 +5,15 @@ export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs))
 }
 
+export function getInitials(name?: string | null): string {
+  if (!name) return "?"
+
+  const nameParts = name.trim().split(" ")
+  const initials = nameParts.map((part) => part[0].toUpperCase()).join("")
+
+  return initials.slice(0, 2)
+}
+
 export function arrayToStringRecord(
   input: Record<string, string[] | undefined>,
   keyMapper?: (key: string) => string,
@@ -20,4 +29,21 @@ export function arrayToStringRecord(
   }
 
   return result
+}
+
+export function detectMimeType(base64: string) {
+  if (base64.startsWith("/9j/")) return "image/jpeg"
+  if (base64.startsWith("iVBORw0KGgo")) return "image/png"
+  if (base64.startsWith("R0lGOD")) return "image/gif"
+  if (base64.startsWith("UklGR")) return "image/webp"
+  if (base64.startsWith("PHN2Zy")) return "image/svg+xml"
+
+  return "image/jpeg"
+}
+
+export function base64ToDataUrl(base64: string) {
+  if (base64.startsWith("data:")) return base64
+
+  const mime = detectMimeType(base64)
+  return `data:${mime};base64,${base64}`
 }

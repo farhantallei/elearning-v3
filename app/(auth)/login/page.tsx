@@ -28,6 +28,16 @@ export default function Page() {
       </CardHeader>
       <CardPanel>
         <Form errors={errors} onSubmit={onSubmit}>
+          <Field name="encrypted_key">
+            <FieldLabel>Encrypted Key</FieldLabel>
+            <Input placeholder="Input encrypted key" />
+          </Field>
+
+          <Field name="token_storage">
+            <FieldLabel>Token Storage</FieldLabel>
+            <Input placeholder="Input token storage" />
+          </Field>
+
           <Field name="token">
             <FieldLabel>Token</FieldLabel>
             <Input placeholder="Input token" />

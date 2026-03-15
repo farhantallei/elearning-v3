@@ -2,14 +2,30 @@
 
 import { createContext } from "react"
 
-type AuthContextValue = { token: string }
+import type { ProfileModel } from "@/features/profile/types"
+
+type AuthContextValue = {
+  encryptedKey: string
+  tokenStorage: string
+  token: string
+  profile: ProfileModel & { photo_profile?: string }
+}
 
 export const AuthContext = createContext({} as AuthContextValue)
 
-type AuthProviderProps = { auth: { token: string } } & React.PropsWithChildren
+type AuthProviderProps = {
+  auth: { encryptedKey: string; tokenStorage: string; token: string }
+  profile: ProfileModel & { photo_profile?: string }
+} & React.PropsWithChildren
 
-export default function AUthProvider({ auth, children }: AuthProviderProps) {
+export default function AUthProvider({
+  auth,
+  profile,
+  children,
+}: AuthProviderProps) {
   return (
-    <AuthContext.Provider value={{ ...auth }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ ...auth, profile }}>
+      {children}
+    </AuthContext.Provider>
   )
 }

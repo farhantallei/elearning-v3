@@ -1,10 +1,28 @@
 import { describe, expect, it } from "bun:test"
 
-import { arrayToStringRecord, cn } from "./utils"
+import { arrayToStringRecord, cn, getInitials } from "./utils"
 
 describe("cn utility function", () => {
   it("merges classes", () => {
     expect(cn("text-sm", null, "text-lg")).toBe("text-lg")
+  })
+})
+
+describe("getInitials", () => {
+  it("returns ? when no name is provided", () => {
+    expect(getInitials()).toBe("?")
+  })
+
+  it("returns initials from first and last name", () => {
+    expect(getInitials("  john doe ")).toBe("JD")
+  })
+
+  it("returns the first letter for a single name", () => {
+    expect(getInitials("Single")).toBe("S")
+  })
+
+  it("ignores middle names", () => {
+    expect(getInitials("Alice Bob Carol")).toBe("AB")
   })
 })
 

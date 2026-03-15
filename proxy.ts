@@ -16,9 +16,9 @@ export async function proxy(req: NextRequest) {
 }
 
 async function handleLoginPath(req: NextRequest, res: NextResponse) {
-  const { token } = getAuthCookies(req)
+  const { encryptedKey, tokenStorage, token } = getAuthCookies(req)
 
-  const hasAllCookies = token
+  const hasAllCookies = encryptedKey && tokenStorage && token
   if (!hasAllCookies) {
     return res
   }
@@ -27,13 +27,19 @@ async function handleLoginPath(req: NextRequest, res: NextResponse) {
 }
 
 async function handleProtectedPath(req: NextRequest, res: NextResponse) {
-  const { token: cookieToken } = getAuthCookies(req)
+  const {
+    encryptedKey: cookieEncryptedKey,
+    tokenStorage: cookieTokenStorage,
+    token: cookieToken,
+  } = getAuthCookies(req)
 
-  const hasAllCookies = cookieToken
+  const hasAllCookies = cookieEncryptedKey && cookieTokenStorage && cookieToken
   if (!hasAllCookies) {
     return NextResponse.redirect(new URL("/login", req.url))
   }
 
+  res.headers.set("x-user-encrypted-key", cookieEncryptedKey)
+  res.headers.set("x-user-token-storage", cookieTokenStorage)
   res.headers.set("x-user-token", cookieToken)
 
   return res
@@ -47,8 +53,12 @@ export const config = {
 }
 
 function getAuthCookies(req: NextRequest) {
+  const encryptedKey =
+    req.cookies.get(cookie.ENCRYPTED_KEY(constant.PREFIX))?.value || null
+  const tokenStorage =
+    req.cookies.get(cookie.TOKEN_STORAGE(constant.PREFIX))?.value || null
   const token =
     req.cookies.get(cookie.AUTH_TOKEN(constant.PREFIX))?.value || null
 
-  return { token }
+  return { encryptedKey, tokenStorage, token }
 }
