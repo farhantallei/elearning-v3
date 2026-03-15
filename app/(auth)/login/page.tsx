@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import SpinnerWrapper from "@/components/common/spinner-wrapper"
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardPanel, CardTitle } from "@/components/ui/card"
-import { Field, FieldLabel } from "@/components/ui/field"
+import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Form } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { loginAction } from "@/features/auth/actions"
@@ -31,16 +31,19 @@ export default function Page() {
           <Field name="encrypted_key">
             <FieldLabel>Encrypted Key</FieldLabel>
             <Input placeholder="Input encrypted key" />
+            <FieldError />
           </Field>
 
           <Field name="token_storage">
             <FieldLabel>Token Storage</FieldLabel>
             <Input placeholder="Input token storage" />
+            <FieldError />
           </Field>
 
           <Field name="token">
             <FieldLabel>Token</FieldLabel>
             <Input placeholder="Input token" />
+            <FieldError />
           </Field>
 
           <Button disabled={isLoading} type="submit">
