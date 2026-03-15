@@ -47,3 +47,10 @@ export function base64ToDataUrl(base64: string) {
   const mime = detectMimeType(base64)
   return `data:${mime};base64,${base64}`
 }
+
+export function buildCookieHeader(params: object) {
+  return Object.entries(params)
+    .filter(([, v]) => v !== undefined && v !== null)
+    .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
+    .join("; ")
+}

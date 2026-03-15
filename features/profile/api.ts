@@ -13,18 +13,22 @@ import type {
 export async function getProfile(query: ProfileQuery) {
   const q = buildQueryParams({ nim: query.encryptedKey })
 
-  return oasisFetcher<SingleResponse<ProfileModel>>(
+  const res = await oasisFetcher<SingleResponse<ProfileModel>>(
     "/feature-guardianship/guardianship-collegestudent/profile",
     q,
   )()
+
+  return res.result
 }
 
 export async function getProfileDp(query: ProfileDpQuery) {
-  return oasisFetcher<SingleResponse<ProfileDpModel | null>>(
+  const res = await oasisFetcher<SingleResponse<ProfileDpModel | null>>(
     `/storage/v1/profile/view/file/role=Mahasiswa&username=${query.encryptedKey}&flag=photo_profile&type=photo`,
   )({
     headers: {
       Authorization: `Bearer ${query.tokenStorage}`,
     },
   })
+
+  return res.result
 }

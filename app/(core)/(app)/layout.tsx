@@ -5,11 +5,7 @@ export default function Layout({ children }: LayoutProps<"/">) {
   return (
     <>
       <AppSidebar />
-      <SidebarInset
-      // className="h-dvh overflow-hidden"
-      >
-        {children}
-      </SidebarInset>
+      <SidebarInset className="h-dvh overflow-hidden">{children}</SidebarInset>
     </>
   )
 }

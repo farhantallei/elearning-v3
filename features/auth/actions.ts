@@ -47,3 +47,16 @@ export async function logoutAction() {
   cookieStore.delete(cookie.ENCRYPTED_KEY(constant.PREFIX))
   cookieStore.delete(cookie.TOKEN_STORAGE(constant.PREFIX))
 }
+
+export async function getAuthAction() {
+  const cookieStore = await cookies()
+
+  const encryptedKey =
+    cookieStore.get(cookie.ENCRYPTED_KEY(constant.PREFIX))?.value || null
+  const tokenStorage =
+    cookieStore.get(cookie.TOKEN_STORAGE(constant.PREFIX))?.value || null
+  const token =
+    cookieStore.get(cookie.AUTH_TOKEN(constant.PREFIX))?.value || null
+
+  return { encryptedKey, tokenStorage, token }
+}

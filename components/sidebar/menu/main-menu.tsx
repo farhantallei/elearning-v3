@@ -1,4 +1,4 @@
-import { Home03Icon } from "@hugeicons/core-free-icons"
+import { Home03Icon, Mortarboard01Icon } from "@hugeicons/core-free-icons"
 import { usePathname } from "next/navigation"
 
 import {
@@ -25,6 +25,15 @@ export default function MainMenu() {
             icon={Home03Icon}
             isActive={pathname === "/"}
             label="Beranda"
+          />
+        </SidebarMenu>
+
+        <SidebarMenu>
+          <SidebarItem
+            href="/subject"
+            icon={Mortarboard01Icon}
+            isActive={pathname === "/subject"}
+            label="Mata Kuliah"
           />
         </SidebarMenu>
       </SidebarGroupContent>

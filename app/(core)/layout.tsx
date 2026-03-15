@@ -17,10 +17,7 @@ export default async function Layout({ children }: LayoutProps<"/">) {
   return (
     <AuthProvider
       auth={auth}
-      profile={{
-        ...profile.result,
-        photo_profile: profileDp.result?.file_content_base64,
-      }}
+      profile={{ ...profile, photo_profile: profileDp?.file_content_base64 }}
     >
       <SidebarProvider>{children}</SidebarProvider>
     </AuthProvider>
