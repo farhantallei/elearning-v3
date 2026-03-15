@@ -2,10 +2,8 @@
 
 import {
   CodeIcon,
-  ComputerIcon,
   CreditCardIcon,
   DownloadIcon,
-  EyeIcon,
   File01Icon,
   FileIcon,
   FloppyDiskIcon,
@@ -14,10 +12,7 @@ import {
   HelpCircleIcon,
   KeyboardIcon,
   LanguageCircleIcon,
-  LayoutIcon,
   LogoutIcon,
-  MailIcon,
-  MoonIcon,
   MoreHorizontalCircle01Icon,
   MoreVerticalCircle01Icon,
   NotificationIcon,
@@ -26,7 +21,6 @@ import {
   SearchIcon,
   SettingsIcon,
   ShieldIcon,
-  SunIcon,
   UserIcon,
 } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"

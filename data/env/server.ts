@@ -3,6 +3,8 @@ import { z } from "zod/v4"
 
 export const env = createEnv({
   server: {
+    NODE_ENV: z.enum(["development", "production", "test"]),
+
     LOG_LEVEL: z
       .enum(["error", "warn", "info", "http", "verbose", "debug", "silly"])
       .default("info"),
