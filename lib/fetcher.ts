@@ -37,7 +37,7 @@ const oasisCurlInterceptor = createInterceptor(async (options, url) => {
 
 const oasisComposedInterceptor = composeInterceptors(
   oasisAuthInterceptor,
-  oasisCurlInterceptor,
+  ...(env.NEXT_PUBLIC_NODE_ENV === "development" ? [oasisCurlInterceptor] : []),
 )
 
 export const oasisFetcher = createFetcher(
@@ -50,10 +50,10 @@ const elearningAuthInterceptor = createInterceptor(async () => {
   const { encryptedKey, token } = await getAuthAction()
 
   const cookieHeader = buildCookieHeader({
-    2492117: `"${encryptedKey}"`,
+    2492117: encryptedKey ? `"${encryptedKey}"` : null,
     // 9121522: `"Mahasiswa"`,
     // 11011001: `"${full_name}"`,
-    712162213: `"${token}"`,
+    712162213: token ? `"${token}"` : null,
   })
 
   return {
@@ -76,7 +76,9 @@ const elearningCurlInterceptor = createInterceptor(async (options, url) => {
 
 const elearningComposedInterceptor = composeInterceptors(
   elearningAuthInterceptor,
-  elearningCurlInterceptor,
+  ...(env.NEXT_PUBLIC_NODE_ENV === "development"
+    ? [elearningCurlInterceptor]
+    : []),
 )
 
 export const elearningFetcher = createFetcher(

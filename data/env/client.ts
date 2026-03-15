@@ -3,6 +3,11 @@ import { z } from "zod/v4"
 
 export const env = createEnv({
   client: {
+    NEXT_PUBLIC_NODE_ENV: z
+      .enum(["development", "production", "test"])
+      .optional()
+      .default("production"),
+
     NEXT_PUBLIC_OASIS_API_URL: z.url().refine((url) => !url.endsWith("/"), {
       error: "NEXT_PUBLIC_OASIS_API_URL must not end with a slash",
     }),
@@ -14,6 +19,8 @@ export const env = createEnv({
   },
   emptyStringAsUndefined: true,
   experimental__runtimeEnv: {
+    NEXT_PUBLIC_NODE_ENV: process.env.NEXT_PUBLIC_NODE_ENV,
+
     NEXT_PUBLIC_OASIS_API_URL: process.env.NEXT_PUBLIC_OASIS_API_URL,
     NEXT_PUBLIC_ELEARNING_API_URL: process.env.NEXT_PUBLIC_ELEARNING_API_URL,
 

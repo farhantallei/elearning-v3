@@ -32,3 +32,6 @@ jobs:
 
       - name: Build Application
         run: bun run build
+        env:
+          NEXT_PUBLIC_OASIS_API_URL: "https://oasis-v2.utb-univ.ac.id/api"
+          NEXT_PUBLIC_ELEARNING_API_URL: "https://elearning-v2.utb-univ.ac.id/api"
