@@ -5,6 +5,7 @@ import {
   buildCookieHeader,
   cn,
   getInitials,
+  sortByDayName,
 } from "./utils"
 
 describe("cn utility function", () => {
@@ -126,6 +127,47 @@ describe("arrayToStringRecord", () => {
     expect(arrayToStringRecord(input, (key) => `prefix.${key}`)).toEqual(
       expected,
     )
+  })
+})
+
+describe("sortByDayName", () => {
+  it("sorts from Senin to Minggu", () => {
+    const input = [
+      { hari: "Minggu" },
+      { hari: "Rabu" },
+      { hari: "Senin" },
+      { hari: "Jumat" },
+    ]
+    const result = sortByDayName(input, (i) => i.hari)
+    expect(result.map((i) => i.hari)).toEqual([
+      "Senin",
+      "Rabu",
+      "Jumat",
+      "Minggu",
+    ])
+  })
+
+  it("keeps stable order for same day", () => {
+    const input = [
+      { hari: "Selasa", name: "A" },
+      { hari: "Senin", name: "B" },
+      { hari: "Selasa", name: "C" },
+    ]
+    const result = sortByDayName(input, (i) => i.hari)
+    expect(result.map((i) => i.name)).toEqual(["B", "A", "C"])
+  })
+
+  it("puts unknown day at the end", () => {
+    const input = [{ hari: "Unknown" }, { hari: "Senin" }]
+    const result = sortByDayName(input, (i) => i.hari)
+    expect(result.map((i) => i.hari)).toEqual(["Senin", "Unknown"])
+  })
+
+  it("does not mutate the original array", () => {
+    const input = [{ hari: "Jumat" }, { hari: "Senin" }]
+    const original = [...input]
+    sortByDayName(input, (i) => i.hari)
+    expect(input).toEqual(original)
   })
 })
 

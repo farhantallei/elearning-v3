@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+import { HARI_ORDER } from "@/lib/constants"
+
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs))
 }
@@ -46,6 +48,16 @@ export function base64ToDataUrl(base64: string) {
 
   const mime = detectMimeType(base64)
   return `data:${mime};base64,${base64}`
+}
+
+export function sortByDayName<T>(
+  items: T[],
+  getDayName: (item: T) => string,
+): T[] {
+  return [...items].sort(
+    (a, b) =>
+      (HARI_ORDER[getDayName(a)] ?? 7) - (HARI_ORDER[getDayName(b)] ?? 7),
+  )
 }
 
 export function buildCookieHeader(params: object) {
