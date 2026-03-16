@@ -34,12 +34,6 @@ export default function Page() {
             <FieldError />
           </Field>
 
-          <Field name="token_storage">
-            <FieldLabel>Token Storage</FieldLabel>
-            <Input placeholder="Input token storage" />
-            <FieldError />
-          </Field>
-
           <Field name="token">
             <FieldLabel>Token</FieldLabel>
             <Input placeholder="Input token" />

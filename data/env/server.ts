@@ -8,6 +8,8 @@ export const env = createEnv({
     LOG_LEVEL: z
       .enum(["error", "warn", "info", "http", "verbose", "debug", "silly"])
       .default("info"),
+
+    TOKEN_STORAGE: z.string().nonempty(),
   },
   emptyStringAsUndefined: true,
   experimental__runtimeEnv: process.env,

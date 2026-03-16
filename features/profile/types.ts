@@ -35,7 +35,6 @@ export type ProfileModel = {
 
 export type ProfileDpQuery = {
   encryptedKey: string
-  tokenStorage: string
 }
 
 export type ProfileDpModel = {

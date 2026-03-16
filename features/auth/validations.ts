@@ -5,9 +5,6 @@ export function validateLoginInput(data: unknown) {
     encrypted_key: z
       .string()
       .nonempty({ error: "Encrypted key should not be empty" }),
-    token_storage: z
-      .string()
-      .nonempty({ error: "Token storage should not be empty" }),
     token: z.string().nonempty({ error: "Token should not be empty" }),
   })
 

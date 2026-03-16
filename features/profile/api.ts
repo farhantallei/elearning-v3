@@ -1,5 +1,6 @@
 import { buildQueryParams } from "@farhantallei/fetcher/helper"
 
+import { env } from "@/data/env/server"
 import { oasisFetcher } from "@/lib/fetcher"
 import type { SingleResponse } from "@/types/response"
 
@@ -26,7 +27,7 @@ export async function getProfileDp(query: ProfileDpQuery) {
     `/storage/v1/profile/view/file/role=Mahasiswa&username=${query.encryptedKey}&flag=photo_profile&type=photo`,
   )({
     headers: {
-      Authorization: `Bearer ${query.tokenStorage}`,
+      Authorization: `Bearer ${env.TOKEN_STORAGE}`,
     },
   })
 

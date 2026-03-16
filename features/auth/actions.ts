@@ -14,7 +14,7 @@ export async function loginAction(formData: FormData) {
   return dalOperation(async () => {
     const data = Object.fromEntries(formData.entries())
 
-    const { encrypted_key, token_storage, token } = validateLoginInput(data)
+    const { encrypted_key, token } = validateLoginInput(data)
 
     const cookieStore = await cookies()
 
@@ -26,13 +26,6 @@ export async function loginAction(formData: FormData) {
     })
 
     cookieStore.set(cookie.ENCRYPTED_KEY(constant.PREFIX), encrypted_key, {
-      httpOnly: true,
-      secure: env.NODE_ENV === "production",
-      sameSite: env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 60 * 60 * 24 * 365 * 10,
-    })
-
-    cookieStore.set(cookie.TOKEN_STORAGE(constant.PREFIX), token_storage, {
       httpOnly: true,
       secure: env.NODE_ENV === "production",
       sameSite: env.NODE_ENV === "production" ? "none" : "lax",
@@ -50,10 +43,8 @@ export async function getAuthAction() {
 
   const encryptedKey =
     cookieStore.get(cookie.ENCRYPTED_KEY(constant.PREFIX))?.value || null
-  const tokenStorage =
-    cookieStore.get(cookie.TOKEN_STORAGE(constant.PREFIX))?.value || null
   const token =
     cookieStore.get(cookie.AUTH_TOKEN(constant.PREFIX))?.value || null
 
-  return { encryptedKey, tokenStorage, token }
+  return { encryptedKey, token }
 }

@@ -8,10 +8,7 @@ export default async function Layout({ children }: LayoutProps<"/">) {
 
   const [profile, profileDp] = await Promise.all([
     getProfile({ encryptedKey: auth.encryptedKey }),
-    getProfileDp({
-      encryptedKey: auth.encryptedKey,
-      tokenStorage: auth.tokenStorage,
-    }),
+    getProfileDp({ encryptedKey: auth.encryptedKey }),
   ])
 
   return (
