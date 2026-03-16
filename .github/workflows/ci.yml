@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    environment: TEST
 
     steps:
       - name: Checkout repository
@@ -33,5 +34,6 @@ jobs:
       - name: Build Application
         run: bun run build
         env:
+          TOKEN_STORAGE: ${{ secrets.TOKEN_STORAGE }}
           NEXT_PUBLIC_OASIS_API_URL: "https://oasis-v2.utb-univ.ac.id/api"
           NEXT_PUBLIC_ELEARNING_API_URL: "https://elearning-v2.utb-univ.ac.id/api"

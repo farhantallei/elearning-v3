@@ -6,7 +6,6 @@ import type { ProfileModel } from "@/features/profile/types"
 
 type AuthContextValue = {
   encryptedKey: string
-  tokenStorage: string
   token: string
   profile: ProfileModel & { photo_profile?: string }
 }
@@ -14,7 +13,7 @@ type AuthContextValue = {
 export const AuthContext = createContext({} as AuthContextValue)
 
 type AuthProviderProps = {
-  auth: { encryptedKey: string; tokenStorage: string; token: string }
+  auth: { encryptedKey: string; token: string }
   profile: ProfileModel & { photo_profile?: string }
 } & React.PropsWithChildren
 

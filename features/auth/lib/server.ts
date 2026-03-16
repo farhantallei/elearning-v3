@@ -3,7 +3,6 @@ import { redirect } from "next/navigation"
 
 import constant from "@/data/constant"
 import cookie from "@/data/cookie"
-import { env } from "@/data/env/server"
 
 export async function getAuth() {
   const heads = await headers()
@@ -15,7 +14,7 @@ export async function getAuth() {
     redirect("/login")
   }
 
-  return { encryptedKey, tokenStorage: env.TOKEN_STORAGE, token }
+  return { encryptedKey, token }
 }
 
 export async function logoutFn() {
