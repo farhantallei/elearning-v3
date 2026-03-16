@@ -4,6 +4,7 @@ import {
   createInterceptor,
 } from "@farhantallei/fetcher"
 import { buildCurl } from "@farhantallei/fetcher/helper"
+import { RedirectType, redirect } from "next/navigation"
 
 import { env } from "@/data/env/client"
 import { getAuthAction } from "@/features/auth/actions"
@@ -40,10 +41,9 @@ const oasisComposedInterceptor = composeInterceptors(
   ...(env.NEXT_PUBLIC_NODE_ENV === "development" ? [oasisCurlInterceptor] : []),
 )
 
-export const oasisFetcher = createFetcher(
-  env.NEXT_PUBLIC_OASIS_API_URL,
-  oasisComposedInterceptor,
-)
+export const oasisFetcher = createFetcher(env.NEXT_PUBLIC_OASIS_API_URL, {
+  interceptor: oasisComposedInterceptor,
+})
 
 // ===== ELEARNING =====
 const elearningAuthInterceptor = createInterceptor(async () => {
@@ -83,5 +83,14 @@ const elearningComposedInterceptor = composeInterceptors(
 
 export const elearningFetcher = createFetcher(
   env.NEXT_PUBLIC_ELEARNING_API_URL,
-  elearningComposedInterceptor,
+  {
+    interceptor: elearningComposedInterceptor,
+    onError: (error) => {
+      if (error.type === "api") {
+        if (error.error.isUnauthorized()) {
+          redirect("/api/auth/logout", RedirectType.replace)
+        }
+      }
+    },
+  },
 )

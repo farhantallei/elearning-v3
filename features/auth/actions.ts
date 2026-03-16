@@ -7,6 +7,7 @@ import cookie from "@/data/cookie"
 import { env } from "@/data/env/server"
 import { dalOperation } from "@/lib/dal/helpers"
 
+import { logoutFn } from "./lib/server"
 import { validateLoginInput } from "./validations"
 
 export async function loginAction(formData: FormData) {
@@ -41,11 +42,7 @@ export async function loginAction(formData: FormData) {
 }
 
 export async function logoutAction() {
-  const cookieStore = await cookies()
-
-  cookieStore.delete(cookie.AUTH_TOKEN(constant.PREFIX))
-  cookieStore.delete(cookie.ENCRYPTED_KEY(constant.PREFIX))
-  cookieStore.delete(cookie.TOKEN_STORAGE(constant.PREFIX))
+  await logoutFn()
 }
 
 export async function getAuthAction() {
