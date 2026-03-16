@@ -59,10 +59,3 @@ export function sortByDayName<T>(
       (HARI_ORDER[getDayName(a)] ?? 7) - (HARI_ORDER[getDayName(b)] ?? 7),
   )
 }
-
-export function buildCookieHeader(params: object) {
-  return Object.entries(params)
-    .filter(([, v]) => v !== undefined && v !== null)
-    .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
-    .join("; ")
-}

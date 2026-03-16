@@ -3,13 +3,11 @@ import {
   createFetcher,
   createInterceptor,
 } from "@farhantallei/fetcher"
-import { buildCurl } from "@farhantallei/fetcher/helper"
+import { buildCookieHeader, buildCurl } from "@farhantallei/fetcher/helper"
 import { RedirectType, redirect } from "next/navigation"
 
 import { env } from "@/data/env/client"
 import { getAuthAction } from "@/features/auth/actions"
-
-import { buildCookieHeader } from "./utils"
 
 // ===== OASIS =====
 const oasisAuthInterceptor = createInterceptor(async () => {
