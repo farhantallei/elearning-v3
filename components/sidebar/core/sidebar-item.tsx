@@ -3,13 +3,18 @@
 import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react"
 import Link from "next/link"
 
-import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
+import {
+  SidebarMenuBadge,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar"
 
 type SidebarItemProps = {
   label: string
   href: string
   icon: IconSvgElement
   isActive?: boolean
+  badge?: React.ReactNode
 }
 
 export default function SidebarItem({
@@ -17,6 +22,7 @@ export default function SidebarItem({
   href,
   icon,
   isActive = false,
+  badge,
 }: SidebarItemProps) {
   return (
     <SidebarMenuItem>
@@ -28,6 +34,7 @@ export default function SidebarItem({
         <HugeiconsIcon icon={icon} strokeWidth={2} />
         <span>{label}</span>
       </SidebarMenuButton>
+      {badge != null ? <SidebarMenuBadge>{badge}</SidebarMenuBadge> : null}
     </SidebarMenuItem>
   )
 }

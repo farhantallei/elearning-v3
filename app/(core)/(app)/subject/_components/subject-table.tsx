@@ -1,5 +1,8 @@
 "use client"
 
+import { use } from "react"
+
+import { CoreContext } from "@/app/(core)/_providers/core-provider"
 import {
   Table,
   TableBody,
@@ -8,13 +11,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import type { SubjectModel } from "@/features/subject/types"
 
-type SubjectTableProps = {
-  subjectList: SubjectModel[]
-}
+export default function SubjectTable() {
+  const { subjectList } = use(CoreContext)
 
-export default function SubjectTable({ subjectList }: SubjectTableProps) {
   return (
     <div className="overflow-hidden rounded-lg border">
       <Table>

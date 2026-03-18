@@ -4,17 +4,18 @@ import {
   PageShellHeader,
   PageShellTitle,
 } from "@/components/layout/page-shell"
-import SubjectTable from "./_components/subject-table"
+
+import TaskView from "./_components/task-view"
 
 export default function Page() {
   return (
     <>
-      <Header breadcrumbs={[{ label: "Mata Kuliah" }]} />
+      <Header breadcrumbs={[{ label: "Tugas" }]} />
       <PageShell>
         <PageShellHeader>
-          <PageShellTitle>Daftar Mata Kuliah</PageShellTitle>
+          <PageShellTitle>Daftar Tugas</PageShellTitle>
         </PageShellHeader>
-        <SubjectTable />
+        <TaskView />
       </PageShell>
     </>
   )
