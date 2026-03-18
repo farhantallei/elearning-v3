@@ -54,7 +54,7 @@ export function sortByDayName<T>(
   items: T[],
   getDayName: (item: T) => string,
 ): T[] {
-  return [...items].sort(
+  return items.toSorted(
     (a, b) =>
       (HARI_ORDER[getDayName(a)] ?? 7) - (HARI_ORDER[getDayName(b)] ?? 7),
   )

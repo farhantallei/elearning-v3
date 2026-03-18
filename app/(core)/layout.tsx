@@ -41,7 +41,7 @@ export default async function Layout({ children }: LayoutProps<"/">) {
       profile={{ ...profile, photo_profile: profileDp?.file_content_base64 }}
     >
       <CoreProvider
-        subjectList={subjectList}
+        subjectList={sortedSubjectList}
         taskCompletedList={taskList.completed}
         taskMissedList={taskList.missed}
         taskPendingList={taskList.pending}
